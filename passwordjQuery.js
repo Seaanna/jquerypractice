@@ -3,21 +3,19 @@ $(document).ready(function(){
   $("button").on(
     "click",
     function() {
+      $("#messages").text("");
+      count ++;
       var userId = $("#userName").val();
       var password = $("#passw").val();
       if (count===5)
       {
-      $("button").off("click")
-      alert("You're done")
-    }
-    if (count<=4){
-    $("button").off("click")
-    alert("You're done")
+        $("button").off("click")
+        alert("Too many tries");
+      }
+
       var errorMessagesArray = checkUserIdAndPassword(userId, password);
       errorMessagesArray.forEach(
         function(errorMessage) {
-
-
           $("#messages").append("<li>" + errorMessage + "</li>");
 
           if (userId.length < 6 || (userId.includes("!") || userId.includes("#") || userId.includes("$"))) {
@@ -32,11 +30,11 @@ $(document).ready(function(){
 
 
 
-}
-        }
-      );
-    });
-  }); // end of document ready
+
+      }
+    );
+  });
+}); // end of document ready
 
 
   // Purpose: check if password and user ID is valid; returns an array of error messages
@@ -50,7 +48,8 @@ $(document).ready(function(){
   function checkUserIdAndPassword(userId, password) {
     var errorMessages = [];
     // var regularExpression = /[0-9]/
-    var identification = (userId.length >= 6 && (!userId.includes("!") && !userId.includes("#") && !userId.includes("$")));
+    var identification = (userId.length >= 6 && (!userId.includes("!") && !userId.includes("#") && !userId.includes("$")))
+
     if (identification) {
       // User ID is okay
 
